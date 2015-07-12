@@ -13,6 +13,7 @@
         <config-file target="config.xml" parent="/*">
             <feature name="Nend">
                 <param name="ios-package" value="CDVNend"/>
+                <param name="onload" value="true"/>
             </feature>
         </config-file>
         <header-file src="src/ios/CDVNend.h" />
