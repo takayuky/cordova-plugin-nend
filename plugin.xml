@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="com.effers.kaky.nend" version="0.1.0">
+    <name>Device</name>
+    <description>Cordova Device Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,nend,ad</keywords>
+    <js-module src="www/nend.js" name="Nend">
+        <clobbers target="Nend" />
+    </js-module>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Nend">
+                <param name="ios-package" value="CDVNend"/>
+            </feature>
+        </config-file>
+        <header-file src="src/ios/CDVNend.h" />
+        <source-file src="src/ios/CDVNend.m" />
+
+        <header-file src="src/ios/NendAd/NADView.h" />
+        <header-file src="src/ios/NendAd/NADInterstitial.h" />
+        <source-file src="src/ios/NendAd/libNendAd.a" framework="true" />
+
+        <framework src="AdSupport.framework"/>
+        <framework src="Security.framework"/>
+        <framework src="ImageIO.framework"/>
+    </platform>
+</plugin>
