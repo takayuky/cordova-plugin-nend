@@ -8,8 +8,10 @@
     CDVPluginResult *pluginResult;
     NSString *callbackId = command.callbackId;
 
-    [[NADInterstitial sharedInstance] loadAdWithApiKey:@"308c2499c75c4a192f03c02b2fcebd16dcb45cc9"
-                                                spotId:@"213208"];
+    NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
+
+    [[NADInterstitial sharedInstance] loadAdWithApiKey:[options objectForKey:@"interstitialApiKey"]
+                                                spotId:[options objectForKey:@"interstitialSpotId"]];
 
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
