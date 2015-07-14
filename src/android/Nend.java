@@ -5,26 +5,27 @@ import net.nend.android.NendAdInterstitial;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.util.Log;
+import android.app.Activity;
 
 public class Nend extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray inputs, final CallbackContext callbackContext) throws JSONException {
         PluginResult result = null;
+        final Activity activity = cordova.getActivity();
 
         if (action.equals("createInterstitial")) {
             JSONObject options = inputs.optJSONObject(0);
             NendAdInterstitial.loadAd(
-                cordova.getActivity().getApplicationContext(),
+                activity.getApplicationContext(),
                 options.getString("interstitialApiKey"),
                 options.getInt("interstitialSpotId")
             );
             callbackContext.success();
 
         } else if (action.equals("showInterstitial")) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
+            activity.runOnUiThread(new Runnable() {
                 public void run() {
-                    NendAdInterstitial.showAd(cordova.getActivity());
+                    NendAdInterstitial.showAd(activity);
                     callbackContext.success();
                 }
             });
