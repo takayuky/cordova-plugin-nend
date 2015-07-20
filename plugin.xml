@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         id="com.effers.kaky.nend" version="0.1.0">
     <name>Nend</name>
-    <description>Cordova Device Plugin</description>
+    <description>Cordova Nend Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,nend,ad</keywords>
     <js-module src="www/nend.js" name="Nend">
