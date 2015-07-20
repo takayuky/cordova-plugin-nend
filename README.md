@@ -11,7 +11,7 @@ As of today, only interstitial ad is supported.
 ## Installation
 
 ```
-cordova plugin add https://github.com/TakayukiSakai/cordova-plugin-nend
+cordova plugin add com.effers.kaky.nend
 ```
 
 ## Getting Started
