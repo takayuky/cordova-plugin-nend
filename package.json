@@ -1,0 +1,17 @@
+{
+    "version": "0.1.0",
+    "name": "com.effers.kaky.nend",
+    "cordova_name": "Nend",
+    "description": "Cordova Nend Plugin",
+    "license": "Apache 2.0",
+    "keywords": [
+        "cordova",
+        "nend",
+        "ad"
+    ],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "engines": []
+}
