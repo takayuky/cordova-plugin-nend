@@ -10,7 +10,7 @@ This is a cordova plugin, which provides a way to request Nend ads natively from
 ## Installation
 
 ```
-cordova plugin add com.effers.kaky.nend
+cordova plugin add https://github.com/TakayukiSakai/cordova-plugin-nend.git
 ```
 
 ## Getting Started
