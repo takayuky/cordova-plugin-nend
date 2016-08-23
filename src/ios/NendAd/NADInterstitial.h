@@ -4,8 +4,8 @@
 //
 //  インタースティシャル広告クラス
 
-#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 ///-----------------------------------------------
 /// @name Constants
@@ -14,32 +14,34 @@
 /**
  NADInterstitialClickType
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, NADInterstitialClickType) {
     DOWNLOAD,
     CLOSE,
-} NADInterstitialClickType;
+    INFORMATION
+};
 
 /**
  NADInterstitialStatusCode
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, NADInterstitialStatusCode) {
     SUCCESS,
     INVALID_RESPONSE_TYPE,
     FAILED_AD_REQUEST,
     FAILED_AD_DOWNLOAD,
-} NADInterstitialStatusCode;
+};
 
 /**
  NADInterstitialShowAdResult
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, NADInterstitialShowResult) {
     AD_SHOW_SUCCESS,
     AD_LOAD_INCOMPLETE,
     AD_REQUEST_INCOMPLETE,
     AD_DOWNLOAD_INCOMPLETE,
     AD_FREQUENCY_NOT_REACHABLE,
-    AD_SHOW_ALREADY
-} NADInterstitialShowResult;
+    AD_SHOW_ALREADY,
+    AD_CANNOT_DISPLAY
+};
 
 /**
  A delegate object for each event of Interstitial-AD.
@@ -51,16 +53,16 @@ typedef enum {
 /**
  Notify the results of the ad load.
  */
-- (void) didFinishLoadInterstitialAdWithStatus:(NADInterstitialStatusCode)status;
+- (void)didFinishLoadInterstitialAdWithStatus:(NADInterstitialStatusCode)status;
 
-- (void) didFinishLoadInterstitialAdWithStatus:(NADInterstitialStatusCode)status spotId:(NSString *)spotId;
+- (void)didFinishLoadInterstitialAdWithStatus:(NADInterstitialStatusCode)status spotId:(NSString *)spotId;
 
 /**
  Notify the event of the ad click.
  */
-- (void) didClickWithType:(NADInterstitialClickType)type;
+- (void)didClickWithType:(NADInterstitialClickType)type;
 
-- (void) didClickWithType:(NADInterstitialClickType)type spotId:(NSString *)spotId;
+- (void)didClickWithType:(NADInterstitialClickType)type spotId:(NSString *)spotId;
 
 @end
 
@@ -71,20 +73,25 @@ typedef enum {
 
 /**
  Set the delegate object.
- 
- @warning Please set this to `nil` when the delegate object is deallocated.
  */
-@property (nonatomic, assign, readwrite) id<NADInterstitialDelegate> delegate;
+@property (nonatomic, weak, readwrite) id<NADInterstitialDelegate> delegate;
 
 /**
  Log setting.
  */
-@property (nonatomic, readwrite) BOOL isOutputLog;
+@property (nonatomic) BOOL isOutputLog;
 
 /**
+ Reload the interstitial ad when close.
+ Defaults to YES
+ */
+@property (nonatomic) BOOL enableAutoReload;
+
+/**
+ Deprecated. Not used.
  Supported Orientations.
  */
-@property (nonatomic, retain) NSArray* supportedOrientations;
+@property (nonatomic) NSArray *supportedOrientations __deprecated_msg("Not used.");
 
 ///-----------------------------------------------
 /// @name Creating and Initializing Nend Instance
@@ -92,10 +99,10 @@ typedef enum {
 
 /**
  Creates and returns a `NADInterstitial` object.
- 
+
  @return NADInterstitial
  */
-+ (instancetype) sharedInstance;
++ (instancetype)sharedInstance;
 
 ///------------------------
 /// @name Loading AD
@@ -103,35 +110,39 @@ typedef enum {
 
 /**
  Load the Interstitial-AD.
- 
+
  @param apiKey An apiKey issued from the management screen.
  @param spotId A spotId issued from the management screen.
  @warning　Please call this when the application starts.
- 
+
  for example:
 
  `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions`
  */
-- (void) loadAdWithApiKey:(NSString *)apiKey spotId:(NSString *)spotId;
+- (void)loadAdWithApiKey:(NSString *)apiKey spotId:(NSString *)spotId;
 
 ///----------------------------
 /// @name Showing / Closing AD
 ///----------------------------
 
 /**
- Show the Interstitial-AD on the UIWindow.
+ Show the Interstitial-AD on the specified UIViewController.
  
  @return NADInterstitialShowResult
  */
-- (NADInterstitialShowResult) showAd;
+- (NADInterstitialShowResult)showAd __deprecated_msg("This method has been replaced by showAdFromViewController:");
 
-- (NADInterstitialShowResult) showAdWithSpotId:(NSString *)spotId;
+- (NADInterstitialShowResult)showAdWithSpotId:(NSString *)spotId __deprecated_msg("This method has been replaced by showAdFromViewController:spotId:");
+
+- (NADInterstitialShowResult)showAdFromViewController:(UIViewController *)viewController;
+
+- (NADInterstitialShowResult)showAdFromViewController:(UIViewController *)viewController spotId:(NSString *)spotId;
 
 /**
  Dismiss the Interstitial-AD.
- 
+
  @return `YES` AD will be closed, otherwise `NO`.
  */
-- (BOOL) dismissAd;
+- (BOOL)dismissAd;
 
 @end

@@ -7,11 +7,11 @@
 #import <UIKit/UIKit.h>
 
 // 広告サイズ
-#define NAD_ADVIEW_SIZE_320x50   CGSizeMake(320,50)
-#define NAD_ADVIEW_SIZE_320x100  CGSizeMake(320,100)
-#define NAD_ADVIEW_SIZE_300x100  CGSizeMake(300,100)
-#define NAD_ADVIEW_SIZE_300x250  CGSizeMake(300,250)
-#define NAD_ADVIEW_SIZE_728x90   CGSizeMake(728,90)
+#define NAD_ADVIEW_SIZE_320x50 CGSizeMake(320, 50)
+#define NAD_ADVIEW_SIZE_320x100 CGSizeMake(320, 100)
+#define NAD_ADVIEW_SIZE_300x100 CGSizeMake(300, 100)
+#define NAD_ADVIEW_SIZE_300x250 CGSizeMake(300, 250)
+#define NAD_ADVIEW_SIZE_728x90 CGSizeMake(728, 90)
 
 // エラー種別
 typedef NS_ENUM(NSInteger, NADViewErrorCode) {
@@ -45,35 +45,31 @@ typedef NS_ENUM(NSInteger, NADViewErrorCode) {
 #pragma mark - 広告バナークリック時に通知されます
 - (void)nadViewDidClickAd:(NADView *)adView;
 
+#pragma mark - インフォメーションボタンクリック時に通知されます
+- (void)nadViewDidClickInformation:(NADView *)adView;
+
 @end
 
-@interface NADView : UIView {
-    id delegate;
-    NSError *error;
-}
+@interface NADView : UIView
 
 #pragma mark - delegateオブジェクトの指定
-@property (nonatomic, assign) id <NADViewDelegate> delegate;
-
-#pragma mark - モーダルビューを表示元のビューコントローラを指定
-// ※現在では利用されないpropertyのため、今後は削除を予定しています。
-@property (nonatomic, assign) UIViewController *rootViewController;
+@property (nonatomic, weak) id<NADViewDelegate> delegate;
 
 #pragma mark - Log出力設定
 @property (nonatomic) BOOL isOutputLog;
 
 #pragma mark - エラー内容出力
-@property (nonatomic, assign) NSError *error;
+@property (nonatomic) NSError *error;
 
 #pragma apiKey
-@property (nonatomic,assign) NSString *nendApiKey;
+@property (nonatomic, copy) NSString *nendApiKey;
 
 #pragma 広告枠ID
-@property (nonatomic,assign) NSString *nendSpotID;
+@property (nonatomic, copy) NSString *nendSpotID;
 
 #pragma mark - 広告初期化と画面幅サイズ調整有無の指定
-- (id)initWithIsAdjustAdSize:(BOOL)isAdjust;
-- (id)initWithFrame:(CGRect)frame isAdjustAdSize:(BOOL)isAdjust;
+- (instancetype)initWithIsAdjustAdSize:(BOOL)isAdjust;
+- (instancetype)initWithFrame:(CGRect)frame isAdjustAdSize:(BOOL)isAdjust;
 
 #pragma mark - 広告枠のapiKeyとspotIDをセット
 - (void)setNendID:(NSString *)apiKey spotID:(NSString *)spotID;
@@ -96,4 +92,3 @@ typedef NS_ENUM(NSInteger, NADViewErrorCode) {
 - (void)resume;
 
 @end
-
