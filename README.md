@@ -5,7 +5,7 @@ This is a cordova plugin, which provides a way to request Nend ads natively from
 ## Supported Platforms (and SDK version)
 
 * Android : nendSDK for Android ver2.6.1
-* iOS : nendSDK for iOS ver2.7.4
+* iOS : nendSDK for iOS ver3.2.0
 
 ## Installation
 
