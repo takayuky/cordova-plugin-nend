@@ -100,7 +100,7 @@
     CDVPluginResult *pluginResult;
     NSString *callbackId = command.callbackId;
 
-    NADInterstitialShowResult result = [[NADInterstitial sharedInstance] showAd];
+    NADInterstitialShowResult result = [[NADInterstitial sharedInstance] showAdFromViewController: self.viewController];
     switch ( result )
     {
         case AD_SHOW_SUCCESS:
